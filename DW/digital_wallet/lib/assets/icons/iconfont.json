@@ -1,0 +1,51 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1249065",
+      "name": "凭证管理",
+      "font_class": "pingzhengguanli",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "4143528",
+      "name": "设置",
+      "font_class": "shezhi",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "5056409",
+      "name": "设置",
+      "font_class": "shezhi1",
+      "unicode": "e608",
+      "unicode_decimal": 58888
+    },
+    {
+      "icon_id": "5301937",
+      "name": "ID",
+      "font_class": "ID",
+      "unicode": "e633",
+      "unicode_decimal": 58931
+    },
+    {
+      "icon_id": "11372685",
+      "name": "扫一扫",
+      "font_class": "saoyisao",
+      "unicode": "e8b5",
+      "unicode_decimal": 59573
+    },
+    {
+      "icon_id": "18165814",
+      "name": "名片,卡片",
+      "font_class": "name-card",
+      "unicode": "e8a6",
+      "unicode_decimal": 59558
+    }
+  ]
+}
