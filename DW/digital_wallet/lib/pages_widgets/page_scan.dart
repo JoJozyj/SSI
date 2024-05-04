@@ -6,6 +6,8 @@ import 'package:flutter/foundation.dart';
 
 const _UIDKEY = "hashed_uid";
 class QRScannerPage extends StatefulWidget {
+  const QRScannerPage({super.key});
+
   @override
   _QRScannerPageState createState() => _QRScannerPageState();
 }

@@ -43,12 +43,12 @@ class _DigitalWalletHomePage extends State<DigitalWalletHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  AppBar(
+      /*appBar:  AppBar(
         title: Text("Digital_Wallet",
         style: TextStyle(color: Colors.white),),
         centerTitle: true,
         backgroundColor: Colors.black,
-      ),
+      ),*/
       body:  _pageList[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,

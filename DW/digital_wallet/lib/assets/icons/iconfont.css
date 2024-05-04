@@ -1,6 +1,6 @@
 @font-face {
   font-family: "iconfont"; /* Project id  */
-  src: url('iconfont.ttf?t=1714558039317') format('truetype');
+  src: url('iconfont.ttf?t=1714800405218') format('truetype');
 }
 
 .iconfont {
@@ -11,16 +11,24 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-jia:before {
+  content: "\f0154";
+}
+
+.icon-shezhi:before {
+  content: "\e643";
+}
+
 .icon-pingzhengguanli:before {
   content: "\e610";
 }
 
-.icon-shezhi:before {
-  content: "\e612";
+.icon-tianjia:before {
+  content: "\e7c4";
 }
 
-.icon-shezhi1:before {
-  content: "\e608";
+.icon-tianjia1:before {
+  content: "\e60e";
 }
 
 .icon-ID:before {
@@ -33,5 +41,9 @@
 
 .icon-name-card:before {
   content: "\e8a6";
+}
+
+.icon-shezhi1:before {
+  content: "\e89d";
 }
 

@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "1269",
+      "name": "加",
+      "font_class": "jia",
+      "unicode": "f0154",
+      "unicode_decimal": 983380
+    },
+    {
+      "icon_id": "1167181",
+      "name": "设置",
+      "font_class": "shezhi",
+      "unicode": "e643",
+      "unicode_decimal": 58947
+    },
+    {
       "icon_id": "1249065",
       "name": "凭证管理",
       "font_class": "pingzhengguanli",
@@ -13,18 +27,18 @@
       "unicode_decimal": 58896
     },
     {
-      "icon_id": "4143528",
-      "name": "设置",
-      "font_class": "shezhi",
-      "unicode": "e612",
-      "unicode_decimal": 58898
+      "icon_id": "1761731",
+      "name": "添加",
+      "font_class": "tianjia",
+      "unicode": "e7c4",
+      "unicode_decimal": 59332
     },
     {
-      "icon_id": "5056409",
-      "name": "设置",
-      "font_class": "shezhi1",
-      "unicode": "e608",
-      "unicode_decimal": 58888
+      "icon_id": "4847098",
+      "name": "添加",
+      "font_class": "tianjia1",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
     },
     {
       "icon_id": "5301937",
@@ -46,6 +60,13 @@
       "font_class": "name-card",
       "unicode": "e8a6",
       "unicode_decimal": 59558
+    },
+    {
+      "icon_id": "22978029",
+      "name": "设置",
+      "font_class": "shezhi1",
+      "unicode": "e89d",
+      "unicode_decimal": 59549
     }
   ]
 }

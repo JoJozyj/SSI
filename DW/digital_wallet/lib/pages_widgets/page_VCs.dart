@@ -1,170 +1,88 @@
 import 'package:flutter/material.dart';
+import '../assets/icons/my_icons.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../base/handle_json.dart';
 import 'package:flutter/foundation.dart';
 
-const _UIDKEY = "hashed_uid";
-class VCPage extends StatefulWidget {
+import 'package:flutter/material.dart';
+
+int getVCsNum(){
+  int num = 0;
+  List vcs = [];
+  int i;
+  for(i=0;i<vcs.length;i++){
+    num++;
+  }
+  return num;
+}
+void applyVC(){
+  print("获得的VC");
+}//生成DID,以及密钥对
+
+
+class VCPage extends StatefulWidget{
+  const VCPage({super.key});
+
   @override
   _VCPageState createState() => _VCPageState();
 }
-
 class _VCPageState extends State<VCPage> {
-  Barcode? result;
-  QRViewController? controller;
-  final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
-
-  //@override
-  //void reassemble() {
-  //  super.reassemble();
-  //  if (Platform.isAndroid = true) {
-  //    controller!.pauseCamera();
-  //  }
-  //  controller!.resumeCamera();
-  //}
+  void onPressed(){}
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: <Widget>[
-          Expanded(flex: 4, child: _buildQrView(context)),
-          Expanded(
-            flex: 1,
-            child: FittedBox(
-              fit: BoxFit.contain,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  if (result != null)
-                    Text(
-                        'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
-                  else
-                    const Text('Scan a code'),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        margin: const EdgeInsets.all(8),
-                        child: ElevatedButton(
-                            onPressed: () async {
-                              await controller?.toggleFlash();
-                              setState(() {});
-                            },
-                            child: FutureBuilder(
-                              future: controller?.getFlashStatus(),
-                              builder: (context, snapshot) {
-                                return Text('Flash: ${snapshot.data}');
-                              },
-                            )),
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text('VCs', style: TextStyle(color: Colors.white),),
+              IconButton(onPressed: (){
+                showDialog(context: context, builder: (BuildContext context){
+                  return AlertDialog(
+                    title: Text('温馨提示'),
+                    content: Text('您确定要申请新的凭证吗？'),
+                    actions: [
+                      TextButton(
+                        child: Text('取消'),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
                       ),
-                      Container(
-                        margin: const EdgeInsets.all(8),
-                        child: ElevatedButton(
-                            onPressed: () async {
-                              await controller?.flipCamera();
-                              setState(() {});
-                            },
-                            child: FutureBuilder(
-                              future: controller?.getCameraInfo(),
-                              builder: (context, snapshot) {
-                                if (snapshot.data != null) {
-                                  return Text(
-                                      'Camera facing ${describeEnum(snapshot.data!)}');
-                                } else {
-                                  return const Text('loading');
-                                }
-                              },
-                            )),
-                      )
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        margin: const EdgeInsets.all(8),
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            await controller?.pauseCamera();
-                          },
-                          child: const Text('pause',
-                              style: TextStyle(fontSize: 20)),
-                        ),
+                      TextButton(
+                        child: Text('确定'),
+                        onPressed: () {
+                          // 这里可以执行确定后的操作
+                          applyVC;
+                          Navigator.pop(context);
+                        },
                       ),
-                      Container(
-                        margin: const EdgeInsets.all(8),
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            await controller?.resumeCamera();
-                          },
-                          child: const Text('resume',
-                              style: TextStyle(fontSize: 20)),
-                        ),
-                      )
                     ],
-                  ),
-                ],
-              ),
+                  );
+                },
+                );
+              }, icon: Icon(MyIcons.Add,
+                color: Colors.white,)),
+            ],
+          ),
+        ),
+        body: ListView(
+          children: <Widget>[
+            ListTile(
+              title: Text('List Item 1'),
             ),
-          )
-        ],
+            Divider(),
+            ListTile(
+              title: Text('List Item 2'),
+            ),
+            Divider(),
+            // ... 更多的ListTile和Divider ...
+          ],
+        ),
       ),
     );
   }
-  Widget _buildQrView(BuildContext context) {
-    // For this example we check how width or tall the device is and change the scanArea and overlay accordingly.
-    var scanArea = (MediaQuery.of(context).size.width < 400 ||
-        MediaQuery.of(context).size.height < 400)
-        ? 150.0
-        : 300.0;
-    // To ensure the Scanner view is properly sizes after rotation
-    // we need to listen for Flutter SizeChanged notification and update controller
-    return QRView(
-      key: qrKey,
-      onQRViewCreated: _onQRViewCreated,
-      overlay: QrScannerOverlayShape(
-          borderColor: Colors.red,
-          borderRadius: 10,
-          borderLength: 30,
-          borderWidth: 10,
-          cutOutSize: scanArea),
-      onPermissionSet: (ctrl, p) => _onPermissionSet(context, ctrl, p),
-    );
-  }
-
-  void _onQRViewCreated(QRViewController controller) {
-    setState(() {
-      this.controller = controller;
-    });
-    controller.scannedDataStream.listen((scanData) {
-      setState(() {
-        result = scanData;
-        dynamic json_result = getData(result?.code);
-        saveData(_UIDKEY, json_result[_UIDKEY]);
-      });
-    });
-  }
-
-  void _onPermissionSet(BuildContext context, QRViewController ctrl, bool p) {
-    //log('${DateTime.now().toIso8601String()}_onPermissionSet $p');
-    if (!p) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('no Permission')),
-      );
-    }
-  }
-
-  @override
-  void dispose() {
-    controller?.dispose();
-    super.dispose();
-  }
-}
-Future<void> saveData(String key, String value) async {
-  final prefs = await SharedPreferences.getInstance();
-  prefs.setString(key, value);
 }
 
